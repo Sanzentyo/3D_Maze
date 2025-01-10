@@ -1,7 +1,7 @@
 # 3D Maze
 pyxelで作成された一人称視点の3D迷路脱出ゲームです。
 
-<video src="./3D_Maze_Demo.mp4" controls></video>
+<video controls src="https://raw.githubusercontent.com/Sanzentyo/3D_Maze/refs/heads/main/3D_Maze_Demo.mp4?token=GHSAT0AAAAAAC5C3UU2D4NF7ZOJ7HBSNZ2WZ4AYUEQ" title="3D_Maze_Demo.mp4"></video>
 
 # installation
 ```sh
