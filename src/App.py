@@ -1,5 +1,5 @@
 import pyxel
-from scene import StartScene, init_sound
+from scene import Scene, StartScene, init_sound
 from global_state import GlobalState
 
 class App:
@@ -11,7 +11,7 @@ class App:
         height (int): 画面の高さ。
         global_state (GlobalState): グローバル状態管理。
         scene: 現在のシーン。
-        
+
     Methods:
         __init__(): コンストラクタ。
         update(): ゲームの状態更新。
@@ -24,14 +24,11 @@ class App:
         self.is_view_wireframe = False
         pyxel.init(width, height)
         init_sound()
-        self.scene = StartScene(self.global_state)
+        self.scene:Scene = StartScene(self.global_state)
         pyxel.run(self.update, self.draw)
 
     def update(self):
-        next_scene = self.scene.update()
-        if next_scene is None:
-            pyxel.quit()
-        self.scene = next_scene
+        self.scene = self.scene.update()
 
     def draw(self):
         self.scene.draw()

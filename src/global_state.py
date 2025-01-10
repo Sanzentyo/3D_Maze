@@ -9,7 +9,7 @@ class GlobalState:
         is_master_view (bool): マスタービュー（自由移動）かどうか。
         is_view_wireframe (bool): ワイヤーフレーム表示のオン/オフ。
         is_view_based_movement (bool): ビュー依存視点移動のオン/オフ。
-        
+
     Methods:
         __init__(): コンストラクタ。
         update(): キーボード状態の更新。
@@ -28,7 +28,7 @@ class GlobalState:
         if pyxel.btn(pyxel.KEY_CTRL) and pyxel.btnp(pyxel.KEY_W):
             self.toggle_wireframe()
 
-        if self.is_master_view and pyxel.btn(pyxel.KEY_M):
+        if self.is_master_view and pyxel.btnp(pyxel.KEY_M):
             self.toggle_view_based_movement()
             
         # マスタービュー切り替え

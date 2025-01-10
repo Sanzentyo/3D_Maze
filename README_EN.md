@@ -1,5 +1,5 @@
 # 3D Maze
-A first-person 3D maze escape game created with pyxel.
+A first-person 3D maze escape game created with pyxel. The BGM is generated using [8bit BGM generator](https://github.com/shiromofufactory/8bit-bgm-generator).
 
 [日本語のドキュメント](./README.md)
 
@@ -20,7 +20,7 @@ python src/App.py # Launch the game
 ```
 
 ## Web Version
-Due to pyxel specifications and performance considerations, text and BGM have been removed. Otherwise, it functions the same as the native version.  
+Due to pyxel specifications and performance considerations, text, scoreboard, and BGM have been removed. Otherwise, it functions the same as the native version.  
 https://sanzentyo.github.io/3D_Maze
 
 ## Controls
@@ -30,3 +30,9 @@ https://sanzentyo.github.io/3D_Maze
 - Mouse Movement: Change camera direction
 - Focus: Press F key with at least one coin collected
 - Destroy Wall: Left-click while focusing
+
+## Debug Controls
+- Toggle Master View Mode: Ctrl + M keys. In Master View Mode, goal detection and wall collision are disabled.
+- Vertical Movement: In Master View Mode, Space to ascend, Shift to descend
+- Toggle Movement Mode: In Master View Mode, M key switches between View Base movement and Yaw Base movement. In normal mode (non-Master View Mode), movement is always Yaw Base.
+- Toggle Wireframe Display: Ctrl + W keys

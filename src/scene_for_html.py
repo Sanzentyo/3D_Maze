@@ -97,7 +97,6 @@ class StartScene(Scene):
         draw(): キャラクターや背景を描画する。
     """
     def __init__(self, global_state:GlobalState):
-        #self.writer: puf.Writer = puf.Writer("misaki_gothic.ttf")
         self.center = (pyxel.width//2, pyxel.height//4)
         self.psychedelic_sphere = PsychedelicSphere(np.array([pyxel.width//2, pyxel.height//2-360, 0]), 300, 18)
         self.title_camera = Camera(
@@ -220,7 +219,6 @@ class GameScene(Scene):
         self.coin_count = len([pos for row in self.map.map_data for pos in row if pos == '.'])
 
         self.highlighted_wall = None
-        #self.writer = puf.Writer("misaki_gothic.ttf")  # フォントファイル名は適宜調整してください
         self.path_points = []
         self.last_recorded_time = time.time()  # フレームカウントから時間に変更
         self.path_record_interval = 0.2  # 記録間隔を1秒に設定
@@ -290,13 +288,19 @@ class GameScene(Scene):
         
         if not self.is_transitioning:
             # 通常の更新処理
-            if not self.is_bird_view:
+            if not self.is_bird_view and not self.global_state.keyboard_state['ctrl']:
                 self.camera.process_mouse_movement((pyxel.mouse_x, pyxel.mouse_y))
                 if self.camera.move_and_is_coin_collected(self.global_state.keyboard_state, self.global_state):
                     pyxel.play(3, 31)  # coin 効果音再生
                     # コイン取得後に球体オブジェクトを更新
                     self.spheres = [RotatingSphere(pos, radius=30, segments=8) 
                                 for pos in self.map.sphere_positions]
+                    
+        if self.global_state.keyboard_state['ctrl']:
+            # Ctrlキーで移動などを無効化して、マウスの現在位置を表示
+            pyxel.mouse(True)
+        else:
+            pyxel.mouse(False)
                 
         # キューブの回転アニメーション
         if self.show_player_cube:
@@ -463,25 +467,6 @@ class GameScene(Scene):
 
         # UIの描画
         if not self.is_goal_reached:
-            # モードの表示
-            #if (self.is_bird_view or self.is_transitioning) and not self.global_state.is_master_view:
-                #self.writer.draw(10, pyxel.height - 30, "Bird View", 20, pyxel.COLOR_WHITE)
-            #elif self.global_state.is_master_view:
-            #    view_mode = "View Based" if self.camera.view_based_movement else "Yaw Based"
-                #self.writer.draw(10, pyxel.height - 30, f"{view_mode} Movement", 20, pyxel.COLOR_WHITE)
-
-            # コイン数を表示
-            remaining = self.map.get_remaining_coins()
-            collected = self.coin_count - remaining
-            #self.writer.draw(10, 10, f"Coins: {collected}/{self.coin_count}", 45, pyxel.COLOR_WHITE)
-
-            # 時間表示（ミリ秒まで含める）
-            minutes = int(self.elapsed_time // 60)
-            seconds = int(self.elapsed_time % 60)
-            milliseconds = int((self.elapsed_time % 1) * 1000)
-            time_str = f"{minutes:02d}:{seconds:02d}.{milliseconds:03d}"
-            #self.writer.draw(pyxel.width - 190, 10, time_str, 40, pyxel.COLOR_WHITE)
-
             if not self.is_bird_view:
                 # 十字のスコープを表示
                 pyxel.rect(pyxel.width // 2 - 10, pyxel.height // 2 - 1, 20, 3, pyxel.COLOR_WHITE)

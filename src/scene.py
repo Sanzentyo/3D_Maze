@@ -329,13 +329,20 @@ class GameScene(Scene):
         
         if not self.is_transitioning:
             # 通常の更新処理
-            if not self.is_bird_view:
+            if not self.is_bird_view and not self.global_state.keyboard_state['ctrl']:
                 self.camera.process_mouse_movement((pyxel.mouse_x, pyxel.mouse_y))
                 if self.camera.move_and_is_coin_collected(self.global_state.keyboard_state, self.global_state):
                     pyxel.play(3, 31)  # coin 効果音再生
                     # コイン取得後に球体オブジェクトを更新
                     self.spheres = [RotatingSphere(pos, radius=30, segments=8) 
                                 for pos in self.map.sphere_positions]
+                    
+        if self.global_state.keyboard_state['ctrl']:
+            # Ctrlキーで移動などを無効化して、マウスの現在位置を表示
+            pyxel.mouse(True)
+            self.camera.init_mouse_pos((pyxel.mouse_x, pyxel.mouse_y))
+        else:
+            pyxel.mouse(False)
                 
         # キューブの回転アニメーション
         if self.show_player_cube:
@@ -510,6 +517,7 @@ class GameScene(Scene):
             if (self.is_bird_view or self.is_transitioning) and not self.global_state.is_master_view:
                 self.writer.draw(10, pyxel.height - 30, "Bird View", 20, pyxel.COLOR_WHITE)
             elif self.global_state.is_master_view:
+                self.writer.draw(10, pyxel.height - 60, "Master View", 20, pyxel.COLOR_WHITE)
                 view_mode = "View Based" if self.camera.view_based_movement else "Yaw Based"
                 self.writer.draw(10, pyxel.height - 30, f"{view_mode} Movement", 20, pyxel.COLOR_WHITE)
 
