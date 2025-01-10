@@ -206,7 +206,7 @@ class GameScene(Scene):
         self.target_pitch = None
         
         # プレイヤー位置表示用のキューブを修正
-        self.player_cube = RotatingCube(
+        self.player_cube:RotatingCube = RotatingCube(
             position=np.array([0, -25, 0]),  # Y座標を-25に変更（床の高さに合わせる）
             size=30,  # サイズを30に縮小
             color=pyxel.COLOR_ORANGE
@@ -234,8 +234,8 @@ class GameScene(Scene):
         self.camera.view_based_movement = self.global_state.is_view_based_movement
 
         if not self.global_state.is_master_view and pyxel.btnp(pyxel.KEY_B):
-            pyxel.play(3, 30)  # 切り替え時の効果音再生
             if not self.is_transitioning:
+                pyxel.play(3, 30)  # 切り替え時の効果音再生
                 self.is_transitioning = True
                 self.transition_start_time = pyxel.frame_count
                 
@@ -326,18 +326,13 @@ class GameScene(Scene):
         if hasattr(self, 'camera') and (current_time - self.last_recorded_time >= self.path_record_interval):
             if not self.is_bird_view and not self.is_transitioning:
                 pos_4d = np.array([self.camera.position[0], 
-                                self.camera.position[1], 
+                                50, 
                                 self.camera.position[2], 
                                 1.0])
-            elif self.is_bird_view:
-                pos_4d = np.array([self.original_position[0],
-                                self.original_position[1],
-                                self.original_position[2],
-                                1.0])
             else:
-                pos_4d = np.array([self.target_position[0],
-                                self.target_position[1],
-                                self.target_position[2],
+                pos_4d = np.array([self.player_cube.position[0],
+                                50,
+                                self.player_cube.position[2],
                                 1.0])
 
             self.path_points.append(pos_4d)
@@ -348,7 +343,7 @@ class GameScene(Scene):
 
             # 先に鳥瞰視点へ移行
             if not self.is_bird_view:
-                self.path_points.append(np.array([self.camera.position[0], self.camera.position[1], self.camera.position[2], 1.0]))
+                self.path_points.append(np.array([self.camera.position[0], 50, self.camera.position[2], 1.0]))
 
                 # 鳥瞰視点に切り替えるための処理を挟む
                 self.is_bird_view = True
