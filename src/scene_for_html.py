@@ -8,7 +8,7 @@ from psychedelic_sphere import PsychedelicSphere
 from typing import List
 from tri_sprite import TriSprite
 from global_state import GlobalState
-from rotating_cube import RotatingCube
+from cube import RotatingCube
 from draw_object import DrawObject
 import time
 
@@ -22,7 +22,7 @@ def init_sound():
 class Scene(ABC):
     """
     シーンの抽象基底クラス
-    
+
     Members:
         なし (抽象クラスのため)
 
