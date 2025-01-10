@@ -1,20 +1,3 @@
-"""
-3D空間内の立方体を表現するクラスを定義するファイルです。
-
-Classes:
-    Cube:
-        3D空間内の立方体を表現する基本クラス。
-        Members:
-            size (float): 立方体の一辺の長さ。
-            half_size (float): サイズの半分（計算用）。
-            center (np.ndarray): 中心座標。
-        Methods:
-            __init__(): コンストラクタ。
-            _generate_vertices(): 立方体の頂点生成。
-            _generate_faces(): 立方体の面と色の生成。
-            is_adjacent(): 他の立方体との隣接判定。
-"""
-
 import numpy as np
 import pyxel
 
@@ -22,6 +5,21 @@ from draw_object import DrawObject
 from tri_sprite import TriSprite
 
 class Cube(DrawObject):
+    """
+    3D空間内の立方体を表現する基本クラス。
+
+    Members:
+        size (float): 立方体の一辺の長さ。
+        half_size (float): サイズの半分（計算用）。
+        center (np.ndarray): 中心座標。
+        
+    Methods:
+        __init__(): コンストラクタ。立方体のパラメータ設定。
+        _generate_vertices(): 頂点の生成。立方体の各頂点を計算。
+        _generate_faces(): 立方体の面と色の生成。
+        get_tri_sprites(): 描画用の三角形スプライト生成。
+        is_adjacent(): 他の立方体との隣接判定。
+    """
     def __init__(self, center_position, size=100):
         self.size = size
         self.half_size = size / 2

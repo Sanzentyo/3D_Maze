@@ -1,26 +1,23 @@
-"""
-3Dオブジェクトの抽象基底クラスを定義します。
-
-Classes:
-    DrawObject(ABC):
-        3Dオブジェクト基底クラス。
-        Members:
-            center (np.ndarray): ワールド座標系での中心位置 [x, y, z, 1]。
-            vertices (list[np.ndarray]): オブジェクトの頂点リスト。
-            faces (list[list[int]]): 頂点インデックスによる面の集合。
-            colors (list[int]): 面ごとの描画色。
-        Methods:
-            __init__(): コンストラクタ。
-            _generate_vertices(): 頂点生成の抽象メソッド。
-            _generate_faces(): 面と色の生成の抽象メソッド。
-            get_tri_sprites(): 三角形スプライトのリストを取得。
-"""
-
 import numpy as np
 from abc import ABC, abstractmethod
 from tri_sprite import TriSprite
 
 class DrawObject(ABC):
+    """
+    3Dオブジェクト基底クラス。
+
+    Members:
+        center (np.ndarray): ワールド座標系での中心位置 [x, y, z, 1]。
+        vertices (list[np.ndarray]): オブジェクトの頂点リスト。
+        faces (list[list[int]]): 頂点インデックスによる面の集合。
+        colors (list[int]): 面ごとの描画色。
+        
+    Methods:
+        __init__(): コンストラクタ。
+        _generate_vertices(): 頂点生成の抽象メソッド。
+        _generate_faces(): 面と色の生成の抽象メソッド。
+        get_tri_sprites(): 三角形スプライトのリストを取得。
+    """
     def __init__(self, center_position):
         self.center = np.array([*center_position, 1])
         self.vertices = self._generate_vertices()

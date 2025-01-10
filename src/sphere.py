@@ -1,19 +1,3 @@
-"""
-3D空間内の球体を表現するクラスを定義するファイルです。
-
-Classes:
-    Sphere:
-        3D空間内の球体を表現するクラス。
-        Members:
-            radius (float): 球体の半径。
-            segments (int): 球体の分割数。
-            center (np.ndarray): 中心座標。
-        Methods:
-            _generate_vertices(): 球体の頂点生成。
-            _generate_faces(): 球体の面と色の生成。
-            get_tri_sprites(): 描画用の三角形スプライト生成。
-"""
-
 import numpy as np
 import pyxel
 
@@ -21,6 +5,19 @@ from draw_object import DrawObject
 from tri_sprite import TriSprite
 
 class Sphere(DrawObject):
+    """
+    3D空間内の球体を表現するクラス。
+
+    Members:
+        radius (float): 球体の半径。
+        segments (int): 球体の分割数。
+        center (np.ndarray): 中心座標。
+        
+    Methods:
+        _generate_vertices(): 球体の頂点生成。
+        _generate_faces(): 球体の面と色の生成。
+        get_tri_sprites(): 描画用の三角形スプライト生成。
+    """
     def __init__(self, center_position, radius=50, segments=16):
         self.radius = radius
         self.segments = segments

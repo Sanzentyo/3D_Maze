@@ -20,8 +20,9 @@ def init_sound():
     pyxel.sounds[33].set("c3", "N", "7", "N", 10)   # start
 
 class Scene(ABC):
-    """シーンの抽象基底クラス
-
+    """
+    シーンの抽象基底クラス
+    
     Members:
         なし (抽象クラスのため)
 
@@ -81,7 +82,8 @@ class Scene(ABC):
         self.draw_tri_sprites(all_sprites, is_view_wireframe=is_view_wireframe, is_back_culling=is_back_culling)
 
 class StartScene(Scene):
-    """ゲーム開始シーン（軽量版）
+    """
+    ゲーム開始シーン（軽量版）
 
     Members:
         center (tuple[int,int]): タイトル表示の中心座標。

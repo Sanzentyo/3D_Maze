@@ -1,39 +1,3 @@
-"""
-迷路の生成や衝突判定、コインやゴールの位置管理などを行います。
-
-Classes:
-    Map:
-        迷路やコインの配置、スタート・ゴール位置を管理。
-        Members:
-            map_data (list[str]): 壁や床を文字で定義したマップデータ。
-            tile_size (float): マップ1マスのサイズ。
-            origin_pos (list[float]): マップ描画基点(ワールド座標)。
-            camera_position (np.ndarray): カメラの現在位置を反映する。
-            sphere_positions (list[np.ndarray]): ステージ上の球体の座標リスト。
-            floor_objects (list[Plane]): 床オブジェクトのリスト。
-            wall_positions (list[np.ndarray]): 壁の位置座標リスト。
-            start_position (list[float]): スタート位置の座標。
-            goal_position (list[float]): ゴール位置の座標。
-        Methods:
-            generate_maze_map(): 迷路を生成してMapインスタンスを返す。
-            __init__(): コンストラクタ。
-            _process_map(): マップデータからオブジェクト生成。
-            get_wall_groups(): 隣接する壁をグループ化。
-            get_draw_objects(): 描画オブジェクトのリストを返す。
-            get_floor_objects(): 床オブジェクトのリストを返す。
-            get_wall_objects(): 壁オブジェクトのリストを返す。
-            get_sphere_objects(): Sphereオブジェクトのリストを返す。
-            get_start_position(): スタート位置の座標を返す。
-            get_initial_view_direction(): スタート地点から見るべき方向を返す。
-            get_bird_view(): 鳥瞰図の位置と向きを返す。
-            is_position_passable(): 指定された座標が移動可能かどうかを確認。
-            check_coin_collection(): コイン取得判定を行う。
-            check_goal_reached(): カメラ位置がゴールタイル上にあるかを判定。
-            set_camera_position_and_check_coin_collection(): カメラの新しい位置を設定し、衝突判定とコイン取得判定を行う。
-            get_remaining_coins(): 残りのコイン数を返す。
-            get_camera_position(): 現在のカメラの位置を取得。
-"""
-
 import numpy as np
 from plane import Plane
 from edge_plane import EdgePlane
@@ -42,6 +6,39 @@ import pyxel
 from maze_generator import MazeGenerator, StartEndStrategy
 
 class Map:
+    """
+    迷路やコインの配置、スタート・ゴール位置を管理。
+
+    Members:
+        map_data (list[str]): 壁や床を文字で定義したマップデータ。
+        tile_size (float): マップ1マスのサイズ。
+        origin_pos (list[float]): マップ描画基点(ワールド座標)。
+        camera_position (np.ndarray): カメラの現在位置を反映する。
+        sphere_positions (list[np.ndarray]): ステージ上の球体の座標リスト。
+        floor_objects (list[Plane]): 床オブジェクトのリスト。
+        wall_positions (list[np.ndarray]): 壁の位置座標リスト。
+        start_position (list[float]): スタート位置の座標。
+        goal_position (list[float]): ゴール位置の座標。
+        
+    Methods:
+        generate_maze_map(): 迷路を生成してMapインスタンスを返す。
+        __init__(): コンストラクタ。
+        _process_map(): マップデータからオブジェクト生成。
+        get_wall_groups(): 隣接する壁をグループ化。
+        get_draw_objects(): 描画オブジェクトのリストを返す。
+        get_floor_objects(): 床オブジェクトのリストを返す。
+        get_wall_objects(): 壁オブジェクトのリストを返す。
+        get_sphere_objects(): Sphereオブジェクトのリストを返す。
+        get_start_position(): スタート位置の座標を返す。
+        get_initial_view_direction(): スタート地点から見るべき方向を返す。
+        get_bird_view(): 鳥瞰図の位置と向きを返す。
+        is_position_passable(): 指定された座標が移動可能かどうかを確認。
+        check_coin_collection(): コイン取得判定を行う。
+        check_goal_reached(): カメラ位置がゴールタイル上にあるかを判定。
+        set_camera_position_and_check_coin_collection(): カメラの新しい位置を設定し、衝突判定とコイン取得判定を行う。
+        get_remaining_coins(): 残りのコイン数を返す。
+        get_camera_position(): 現在のカメラの位置を取得。
+    """
     @classmethod
     def generate_maze_map(cls, width, height, origin_pos, tile_size, 
                          coin_count=None, strategy=StartEndStrategy.DIAGONAL,

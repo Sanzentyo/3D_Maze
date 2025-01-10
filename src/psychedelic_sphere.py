@@ -1,22 +1,19 @@
-"""
-カラフルなパターンを持つ球体を定義します。
-
-Classes:
-    PsychedelicSphere(RotatingSphere):
-        回転球体を継承し、色を周期的に変化させる球体。
-        Members:
-            color_phase (float): 色変化に用いる位相。
-            color_speed (float): 色変化の速度。
-        Methods:
-            __init__(): コンストラクタ。
-            _generate_faces(): 色情報を付与した面を生成。
-            update(): 色変化を行う。
-"""
-
 import pyxel
 from rotating_sphere import RotatingSphere
 
 class PsychedelicSphere(RotatingSphere):
+    """
+    RotatingSphereを継承し、色を周期的に変化させる球体。
+
+    Members:
+        color_phase (float): 色変化に用いる位相。
+        color_speed (float): 色変化の速度。
+    
+    Methods:
+        __init__(): コンストラクタ。
+        _generate_faces(): 色情報を付与した面を生成。
+        update(): 色変化を行う。
+    """
     def __init__(self, center_position, radius=50, segments=16, color_speed=0.05):
         super().__init__(center_position, radius, segments)
         self.color_time = 0

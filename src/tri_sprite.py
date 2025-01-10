@@ -1,23 +1,20 @@
-"""
-3Dポリゴンの2D描画を管理するクラスを定義するファイルです。
-
-Classes:
-    TriSprite:
-        三角形ポリゴンの描画を管理するクラス。
-        Members:
-            p1, p2, p3 (tuple[float, float, float, float]): 三角形の頂点座標(x,y,z,w)。
-            color (int): 描画色。
-        Methods:
-            get_depth(): 深度値の計算。
-            is_frontface(): 表面判定。
-            draw(): 三角形の描画。
-            clip_triangle(): ビュー範囲内でのクリッピング処理。
-"""
-
 import pyxel
 import numpy as np
 
 class TriSprite:
+    """
+    三角形ポリゴンの描画を管理するクラス。
+
+    Members:
+        p1, p2, p3 (tuple[float, float, float, float]): 三角形の頂点座標(x,y,z,w)。
+        color (int): 描画色。
+        
+    Methods:
+        get_depth(): 深度値の計算。
+        is_frontface(): 表面判定。
+        draw(): 三角形の描画。
+        clip_triangle(): ビュー範囲内でのクリッピング処理。
+    """
     def __init__(
         self,
         p1: tuple[float, float, float, float],

@@ -1,41 +1,39 @@
-"""
-迷路の生成を行うクラスを定義するファイルです。
-
-Classes:
-    StartEndStrategy(Enum):
-        スタートとゴールの配置戦略を定義する列挙型。
-        Values:
-            DIAGONAL: 対角配置
-            RANDOM: ランダム配置
-            MANUAL: 手動指定
-            MIN_DISTANCE: 最小距離保証
-
-    MazeGenerator:
-        迷路の生成を管理するクラス。
-        Members:
-            width (int): 迷路の幅。
-            height (int): 迷路の高さ。
-            maze (list[list[str]]): 迷路データ。
-        Methods:
-            __init__(): コンストラクタ。
-            _get_empty_spaces(): 空きマスの位置を取得。
-            _calculate_distance(): 2点間のマンハッタン距離を計算。
-            _are_adjacent(): 2つの位置が隣接しているかチェック。
-            _place_start_end(): スタートとゴールを配置。
-            generate(): 迷路の生成実行。
-"""
-
 import random
 from enum import Enum
 from typing import Tuple, Optional
 
 class StartEndStrategy(Enum):
+    """
+    スタートとゴールの配置戦略を定義する列挙型。
+    
+    Values:
+        DIAGONAL: 対角配置
+        RANDOM: ランダム配置
+        MANUAL: 手動指定
+        MIN_DISTANCE: 最小距離保証
+    """
     DIAGONAL = "diagonal"          # 対角に配置
     RANDOM = "random"             # ランダムに配置
     MANUAL = "manual"             # 明示的に指定
     MIN_DISTANCE = "min_distance"  # 最小距離を保証
 
 class MazeGenerator:
+    """
+    迷路の生成を管理するクラス。
+
+    Members:
+        width (int): 迷路の幅。
+        height (int): 迷路の高さ。
+        maze (list[list[str]]): 迷路データ。
+
+    Methods:
+        __init__(): コンストラクタ。
+        _get_empty_spaces(): 空きマスの位置を取得。
+        _calculate_distance(): 2点間のマンハッタン距離を計算。
+        _are_adjacent(): 2つの位置が隣接しているかチェック。
+        _place_start_end(): スタートとゴールを配置。
+            generate(): 迷路の生成実行。
+    """
     def __init__(self, width, height):
         self.width = width
         self.height = height

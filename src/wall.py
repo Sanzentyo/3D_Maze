@@ -1,27 +1,21 @@
-"""
-3D空間内の壁を表現するクラスを定義するファイルです。
-
-Classes:
-    Wall:
-        3D迷路の壁を表現するクラス。
-        Members:
-            positions (list[list[float]]): 壁の位置座標のリスト。
-            size (float): 壁の一辺の長さ。
-            half_size (float): サイズの半分（計算用）。
-
-    HighlightedWall:
-        フォーカス時にハイライト表示される壁クラス。
-        Members:
-            position (list[float]): 壁の位置座標。
-            edge_width (int): エッジの太さ。
-"""
-
 from draw_object import DrawObject
 from tri_sprite import TriSprite
 import numpy as np
 import pyxel
 
 class Wall(DrawObject):
+    """
+    3D迷路の壁を表現するクラス。
+    Members:
+        positions (list[list[float]]): 壁の位置座標のリスト。
+        size (float): 壁の一辺の長さ。
+        half_size (float): サイズの半分（計算用）。
+    Methods:
+        __init__(): コンストラクタ。壁のパラメータ設定。
+        _generate_vertices(): 頂点の生成。隣接する壁の判定も行う。
+        _generate_faces(): 面と色の生成。
+        _is_adjacent(): 他の壁との隣接判定。
+    """
     def __init__(self, positions: list[list[float]], size: float):
         self.positions = positions
         self.size = size
@@ -105,7 +99,14 @@ class Wall(DrawObject):
 
 class HighlightedWall(Wall):
     """
-    壁の面を表示せず、エッジをパープル色で描画。
+    フォーカス時にハイライト表示される壁クラス。壁の面を表示せず、エッジをパープル色で描画。
+    
+    Members:
+        edge_width (float): エッジの太さ。
+    
+    Methods:
+        __init__(): コンストラクタ。エッジ付き壁の初期化。
+        get_tri_sprites(): エッジ描画用の三角形スプライト生成。
     """
     def __init__(self, position, tile_size):
         super().__init__([position], tile_size)

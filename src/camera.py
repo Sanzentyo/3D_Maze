@@ -1,38 +1,35 @@
-"""
-3Dシーンのビュー行列や投影行列の計算を行うクラスを定義します。
-
-Classes:
-    Camera:
-        視点位置や移動・回転、投影行列管理を行うクラス。
-        Members:
-            position (np.ndarray): カメラ位置 (x, y, z) を保持。
-            yaw (float): 水平回転角度[rad]。
-            pitch (float): 垂直回転角度[rad]。
-            aspect (float): 画面のアスペクト比。
-            fov (float): 垂直画角 (度)。
-            z_near (float): 近クリップ面の距離。
-            z_far (float): 遠クリップ面の距離。
-            mouse_sensivity (float): マウス感度。
-            view_based_movement (bool): 移動操作を視点ベースで行うかどうか。
-            map (Map|None): 当カメラに関連づけられたゲーム空間マップ。
-        Methods:
-            __init__(): カメラの初期化。
-            init_mouse_pos(): マウス座標の初期化。
-            process_mouse_movement(): マウス移動による視点回転処理。
-            move_and_is_coin_collected(): キーボード入力による移動処理。
-            toggle_movement_mode(): 移動モードの切り替え。
-            get_translation_matrix(): 平行移動行列の取得。
-            get_rotation_matrix(): 回転行列の取得。
-            get_view_matrix(): ビュー行列の取得。
-            get_view_matrix_inline(): ビュー行列の取得 (インライン版)。
-            get_projection_matrix(): 投影行列の取得。
-"""
-
 import numpy as np
 from global_state import GlobalState
 from map import Map  # Mapクラスをインポート
 
 class Camera:
+    """
+    視点位置や移動・回転、投影行列管理を行うクラス。
+
+    Members:
+        position (np.ndarray): カメラ位置 (x, y, z) を保持。
+        yaw (float): 水平回転角度[rad]。
+        pitch (float): 垂直回転角度[rad]。
+        aspect (float): 画面のアスペクト比。
+        fov (float): 垂直画角 (度)。
+        z_near (float): 近クリップ面の距離。
+        z_far (float): 遠クリップ面の距離。
+        mouse_sensivity (float): マウス感度。
+        view_based_movement (bool): 移動操作を視点ベースで行うかどうか。
+        map (Map|None): 当カメラに関連づけられたゲーム空間マップ。
+        
+    Methods:
+        __init__(): カメラの初期化。
+        init_mouse_pos(): マウス座標の初期化。
+        process_mouse_movement(): マウス移動による視点回転処理。
+        move_and_is_coin_collected(): キーボード入力による移動処理。
+        toggle_movement_mode(): 移動モードの切り替え。
+        get_translation_matrix(): 平行移動行列の取得。
+        get_rotation_matrix(): 回転行列の取得。
+        get_view_matrix(): ビュー行列の取得。
+        get_view_matrix_inline(): ビュー行列の取得 (インライン版)。
+        get_projection_matrix(): 投影行列の取得。
+    """
     def __init__(self, position: np.ndarray, yaw: float, pitch: float, aspect: float, fov: float, z_near: float, z_far: float, mouse_sensivity: float = 0.01, prev_mouse_pos: tuple[int, int] = None, view_based_movement: bool = True, map_instance: Map = None):
         self.position = position
         self.yaw = yaw

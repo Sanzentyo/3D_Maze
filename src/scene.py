@@ -21,7 +21,8 @@ def init_sound():
     pyxel.sounds[33].set("c3", "N", "7", "N", 10)   # start
 
 class Scene(ABC):
-    """シーンの抽象基底クラス
+    """
+    シーンの抽象基底クラス
 
     Members:
         なし (抽象クラスのため)
@@ -82,7 +83,8 @@ class Scene(ABC):
         self.draw_tri_sprites(all_sprites, is_view_wireframe=is_view_wireframe, is_back_culling=is_back_culling)
 
 class StartScene(Scene):
-    """ゲーム開始シーン
+    """
+    ゲーム開始シーン
 
     Members:
         writer (Writer): テキスト描画用ライター。
@@ -162,7 +164,8 @@ class StartScene(Scene):
                 pyxel.play(ch, ch, loop=True)
 
 class GameScene(Scene):
-    """メインのプレイシーン
+    """
+    メインのプレイシーン
 
     Members:
         map (Map): 迷路マップデータ。
@@ -544,7 +547,8 @@ class GameScene(Scene):
                     pyxel.line(int(x0), int(y0), int(x1), int(y1), pyxel.COLOR_ORANGE)
 
 class ScoreBoard:
-    """スコア表示用UIコンポーネント
+    """
+    スコア表示用UIコンポーネント
 
     Members:
         writer (Writer): テキスト描画のためのライター。
@@ -589,7 +593,8 @@ class ScoreBoard:
             self.writer.draw(board_x + 20, board_y + 405, "Press R to restart", 60, pyxel.COLOR_BLACK)
 
 class ScoreScene(Scene):
-    """スコア表示シーン
+    """
+    スコア表示シーン
 
     Members:
         game_scene (GameScene): スコアを参照するゲームシーン。

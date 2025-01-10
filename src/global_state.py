@@ -1,25 +1,22 @@
-"""
-キーボードやマウスなど、アプリ全体で参照する入力状態を保持します。
-
-Classes:
-    GlobalState:
-        入力状態やフラグ類をまとめるクラス。
-        Members:
-            keyboard_state (dict[str, bool]): 各キー押下を管理する辞書。
-            is_master_view (bool): マスタービュー（自由移動）かどうか。
-            is_view_wireframe (bool): ワイヤーフレーム表示のオン/オフ。
-            is_view_based_movement (bool): ビュー依存視点移動のオン/オフ。
-        Methods:
-            __init__(): コンストラクタ。
-            update(): キーボード状態の更新。
-            toggle_wireframe(): ワイヤーフレーム表示の切り替え。
-            toggle_master_view(): マスタービューの切り替え。
-            toggle_view_based_movement(): ビュー依存視点移動の切り替え。
-"""
-
 import pyxel
 
 class GlobalState:
+    """
+    入力状態やフラグ類をまとめるクラス。
+
+    Members:
+        keyboard_state (dict[str, bool]): 各キー押下を管理する辞書。
+        is_master_view (bool): マスタービュー（自由移動）かどうか。
+        is_view_wireframe (bool): ワイヤーフレーム表示のオン/オフ。
+        is_view_based_movement (bool): ビュー依存視点移動のオン/オフ。
+        
+    Methods:
+        __init__(): コンストラクタ。
+        update(): キーボード状態の更新。
+        toggle_wireframe(): ワイヤーフレーム表示の切り替え。
+        toggle_master_view(): マスタービューの切り替え。
+        toggle_view_based_movement(): ビュー依存視点移動の切り替え。
+    """
     def __init__(self):
         self.is_view_wireframe = False # CTRL + Wで切り替え
         self.is_master_view = False # CTRL + Mで切り替え

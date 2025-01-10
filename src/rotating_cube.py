@@ -1,26 +1,23 @@
-"""
-回転する立方体のクラスを定義します。
-
-Classes:
-    RotatingCube(DrawObject):
-        立方体を表し、回転運動を行う。
-        Members:
-            position (np.ndarray): 立方体の中心座標 [x, y, z, 1]。
-            size (float): 立方体の一辺の長さ。
-            color (int): Pyxelカラーパレット番号。
-            rotation_angle (float): 回転を管理する角度。
-            rotation_speed (float): 回転速度。
-            base_vertices (list[np.ndarray]): 基本頂点情報。
-        Methods:
-            __init__(): コンストラクタ。
-            update(): フレームごとに回転角度を更新。
-            _generate_vertices(): 回転を適用した頂点を生成。
-"""
-
 from cube import Cube
 import numpy as np
 
 class RotatingCube(Cube):
+    """
+    Cubeを継承し、回転運動を行う。
+
+    Members:
+        position (np.ndarray): 立方体の中心座標 [x, y, z, 1]。
+        size (float): 立方体の一辺の長さ。
+        color (int): Pyxelカラーパレット番号。
+        rotation_angle (float): 回転を管理する角度。
+        rotation_speed (float): 回転速度。
+        base_vertices (list[np.ndarray]): 基本頂点情報。
+        
+    Methods:
+        __init__(): コンストラクタ。
+        update(): フレームごとに回転角度を更新。
+        _generate_vertices(): 回転を適用した頂点を生成。
+    """
     def __init__(self, position, size=100, color=None):
         self.rotation_angle = 0
         self.rotation_speed = 0.05
