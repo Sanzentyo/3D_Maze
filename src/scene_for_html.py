@@ -3,12 +3,11 @@ import pyxel
 import numpy as np
 from camera import Camera
 from map import Map
-from rotating_sphere import RotatingSphere
-from psychedelic_sphere import PsychedelicSphere
+from sphere import RotatingSphere, PsychedelicSphere
+from cube import RotatingCube
 from typing import List
 from tri_sprite import TriSprite
 from global_state import GlobalState
-from cube import RotatingCube
 from draw_object import DrawObject
 import time
 

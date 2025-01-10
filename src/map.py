@@ -1,6 +1,5 @@
 import numpy as np
-from plane import Plane
-from edge_plane import EdgePlane
+from plane import Plane, EdgePlane
 from sphere import Sphere
 import pyxel
 from maze_generator import MazeGenerator, StartEndStrategy
@@ -19,7 +18,7 @@ class Map:
         wall_positions (list[np.ndarray]): 壁の位置座標リスト。
         start_position (list[float]): スタート位置の座標。
         goal_position (list[float]): ゴール位置の座標。
-        
+
     Methods:
         generate_maze_map(): 迷路を生成してMapインスタンスを返す。
         __init__(): コンストラクタ。
