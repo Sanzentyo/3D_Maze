@@ -1,3 +1,23 @@
+"""
+回転する球体のサンプルクラスを定義します。
+
+Classes:
+    RotatingSphere(DrawObject):
+        一定速度で回転する球体オブジェクト。
+        Members:
+            position (np.ndarray): 球体の中心座標。
+            radius (float): 球体の半径。
+            segments (int): 球を描画する際の分割数。
+            rotation_angle (float): 回転角度を蓄積する変数。
+            rotation_axis (np.ndarray): 回転軸の方向ベクトル。
+            rotation_speed (float): 回転速度。
+            base_vertices (list[np.ndarray]): 基本頂点情報。
+        Methods:
+            __init__(): コンストラクタ。
+            update(): フレームごとに回転角度を更新して頂点を再計算。
+            _generate_vertices(): 回転を適用した頂点を生成。
+"""
+
 import numpy as np
 from sphere import Sphere
 

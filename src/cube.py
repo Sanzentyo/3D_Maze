@@ -1,3 +1,20 @@
+"""
+3D空間内の立方体を表現するクラスを定義するファイルです。
+
+Classes:
+    Cube:
+        3D空間内の立方体を表現する基本クラス。
+        Members:
+            size (float): 立方体の一辺の長さ。
+            half_size (float): サイズの半分（計算用）。
+            center (np.ndarray): 中心座標。
+        Methods:
+            __init__(): コンストラクタ。
+            _generate_vertices(): 立方体の頂点生成。
+            _generate_faces(): 立方体の面と色の生成。
+            is_adjacent(): 他の立方体との隣接判定。
+"""
+
 import numpy as np
 import pyxel
 
@@ -77,4 +94,4 @@ class Cube(DrawObject):
 
     def is_adjacent(self, other, size):
         return (abs(self.center[0] - other.center[0]) == size and self.center[2] == other.center[2]) or (abs(self.center[2] - other.center[2]) == size and self.center[0] == other.center[0])
-    
+

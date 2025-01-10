@@ -1,3 +1,20 @@
+"""
+エッジ付きの平面を表現するクラスを定義するファイルです。
+
+Classes:
+    EdgePlane:
+        縁取り付きの平面を表現するクラス。Planeクラスの拡張。
+        Members:
+            edge_width (float): エッジの幅。
+            center_color (int): 中央部分の色。
+            edge_color (int): エッジ部分の色。
+        Methods:
+            __init__(): コンストラクタ。
+            _generate_vertices(): エッジ付き平面の頂点生成。
+            _generate_faces(): 中央部とエッジ部の面生成。
+            get_tri_sprites(): 描画用の三角形スプライト生成。
+"""
+
 import numpy as np
 import pyxel
 from plane import Plane

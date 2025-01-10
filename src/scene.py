@@ -21,6 +21,18 @@ def init_sound():
     pyxel.sounds[33].set("c3", "N", "7", "N", 10)   # start
 
 class Scene(ABC):
+    """シーンの抽象基底クラス
+
+    Members:
+        なし (抽象クラスのため)
+
+    Methods:
+        update(): シーンごとの状態更新を行う。
+        draw(): シーンごとの描画処理を行う。
+        get_tri_sprites(): 3Dオブジェクトから三角形スプライトを取得。
+        draw_tri_sprites(): 三角形スプライトを描画。ワイヤーフレーム表示も可能。
+        render_3d_scene(): カメラ情報を用いて3Dシーンをレンダリングする。
+    """
     @abstractmethod
     def update(self):
         pass
@@ -70,6 +82,22 @@ class Scene(ABC):
         self.draw_tri_sprites(all_sprites, is_view_wireframe=is_view_wireframe, is_back_culling=is_back_culling)
 
 class StartScene(Scene):
+    """ゲーム開始シーン
+
+    Members:
+        writer (Writer): テキスト描画用ライター。
+        center (tuple[int,int]): タイトル文字の座標中心。
+        psychedelic_sphere (PsychedelicSphere): タイトル画面の装飾球体。
+        title_camera (Camera): タイトル画面のカメラ。
+        global_state (GlobalState): 全体入力状態を保持。
+        tile_size (int): 背景タイルサイズ。
+        bgm_data (list): BGM用の音楽データ。
+
+    Methods:
+        __init__(): コンストラクタ。ライターやカメラ等を初期化する。
+        update(): 入力を受け取り、ゲームシーンへの遷移などを処理する。
+        draw(): タイトル画面の背景や文字などを描画する。
+    """
     def __init__(self, global_state:GlobalState):
         self.writer: puf.Writer = puf.Writer("misaki_gothic.ttf")
         self.center = (pyxel.width//2, pyxel.height//4)
@@ -134,6 +162,30 @@ class StartScene(Scene):
                 pyxel.play(ch, ch, loop=True)
 
 class GameScene(Scene):
+    """メインのプレイシーン
+
+    Members:
+        map (Map): 迷路マップデータ。
+        camera (Camera): プレイヤー視点を管理するカメラ。
+        planes (list[Plane]): 床面を表すPlaneオブジェクト群。
+        walls (list[DrawObject]): 壁を表すDrawObject群。
+        spheres (list[RotatingSphere]): 回転する球体オブジェクト。
+        path_points (list): プレイヤーが移動した位置履歴。
+        is_bird_view (bool): 鳥瞰モードかどうか。
+        highlighted_wall (DrawObject|None): ハイライトされている壁。
+        coin_count (int): コインの総数。
+        is_goal_reached (bool): ゴールしたかどうか。
+        bgm_data (list): BGM用の音楽データ。
+        writer (Writer): テキストの描画用ライター。
+
+    Methods:
+        __init__(): マップ・カメラ・BGMなどを初期化し、ゲームを準備する。
+        update(): 入力や壁破壊判定、鳥瞰モード切り替えなどゲーム状態を更新する。
+        _highlight_wall_in_front(): カメラ正面の壁をハイライトする内部処理。
+        _destroy_highlighted_wall(): ハイライト中の壁を破壊し、マップを更新する。
+        draw(): 3D空間とUIの描画を行う。
+        draw_path(): プレイヤーの移動経路を線で描画する。
+    """
     def __init__(self, global_state):
         # マップを生成
         self.map = Map.generate_maze_map(15, 15, [0, 0, 0], 100, coin_count=3)
@@ -497,6 +549,16 @@ class GameScene(Scene):
                     pyxel.line(int(x0), int(y0), int(x1), int(y1), pyxel.COLOR_ORANGE)
 
 class ScoreBoard:
+    """スコア表示用UIコンポーネント
+
+    Members:
+        writer (Writer): テキスト描画のためのライター。
+        time_str (str): 経過時間を文字列化したもの。
+
+    Methods:
+        __init__(): 経過時間や表示位置などの初期設定を行う。
+        draw(): スコアボードの内容（時間など）を描画する。
+    """
     def __init__(self, elapsed_time:float, screen_width:int, screen_height:int):
         self.writer = puf.Writer("misaki_gothic.ttf")
         self.screen_width = screen_width
@@ -532,6 +594,20 @@ class ScoreBoard:
             self.writer.draw(board_x + 20, board_y + 405, "Press R to restart", 60, pyxel.COLOR_BLACK)
 
 class ScoreScene(Scene):
+    """スコア表示シーン
+
+    Members:
+        game_scene (GameScene): スコアを参照するゲームシーン。
+        global_state (GlobalState): 全体の入力状態。
+        is_score_view (bool): スコア表示中かどうか。
+        scoreboard (ScoreBoard): スコアボードオブジェクト。
+        bgm_data (list): BGM用の音楽データ。
+
+    Methods:
+        __init__(): スコアシーンの初期化を行い、ScoreBoardなどを用意する。
+        update(): 入力を受け取り、リスタートやシーン遷移を管理する。
+        draw(): スコア内容を描画し、終了後の演出を行う。
+    """
     def __init__(self, game_scene:GameScene, elapsed_time, global_state:GlobalState):
         # GameSceneを保持し、スコアとともに管理
         self.game_scene = game_scene

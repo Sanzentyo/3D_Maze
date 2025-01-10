@@ -20,6 +20,18 @@ def init_sound():
     pyxel.sounds[33].set("c3", "N", "7", "N", 10)   # start
 
 class Scene(ABC):
+    """シーンの抽象基底クラス
+
+    Members:
+        なし (抽象クラスのため)
+
+    Methods:
+        update(): シーンごとの状態更新を行う。
+        draw(): シーンごとの描画処理を行う。
+        get_tri_sprites(): 3Dオブジェクトから三角形スプライトを取得。
+        draw_tri_sprites(): 三角形スプライトを描画する。
+        render_3d_scene(): カメラ視点で3Dシーンをレンダリングする。
+    """
     @abstractmethod
     def update(self):
         pass
@@ -69,6 +81,20 @@ class Scene(ABC):
         self.draw_tri_sprites(all_sprites, is_view_wireframe=is_view_wireframe, is_back_culling=is_back_culling)
 
 class StartScene(Scene):
+    """ゲーム開始シーン（軽量版）
+
+    Members:
+        center (tuple[int,int]): タイトル表示の中心座標。
+        psychedelic_sphere (PsychedelicSphere): タイトル画面の装飾球体。
+        title_camera (Camera): タイトル画面用カメラ。
+        global_state (GlobalState): 入力状態を持つ。
+        tile_size (int): 背景タイルサイズ。
+
+    Methods:
+        __init__(): シンプルなコンストラクタ（BGM等は使用しない）。
+        update(): 入力を確認してシーン遷移を行う。
+        draw(): キャラクターや背景を描画する。
+    """
     def __init__(self, global_state:GlobalState):
         #self.writer: puf.Writer = puf.Writer("misaki_gothic.ttf")
         self.center = (pyxel.width//2, pyxel.height//4)
@@ -114,6 +140,26 @@ class StartScene(Scene):
         )
 
 class GameScene(Scene):
+    """メインプレイシーン（軽量版）
+
+    Members:
+        map (Map): 迷路マップデータ。
+        camera (Camera): プレイヤーの視点。
+        planes (list[Plane]): 床面となるPlaneのリスト。
+        walls (list[DrawObject]): 壁オブジェクトのリスト。
+        spheres (list[RotatingSphere]): 回転球体のリスト。
+        is_bird_view (bool): 鳥瞰モードかどうか。
+        highlighted_wall (DrawObject|None): ハイライトされている壁。
+        coin_count (int): コインの初期総数。
+        is_goal_reached (bool): ゴール済みかどうか。
+
+    Methods:
+        __init__(): 迷路やカメラなどを初期化する（BGM処理なし）。
+        update(): 入力や壁破壊などの状態更新を行う。
+        draw(): 3DオブジェクトとUI要素を描画する。
+        _highlight_wall_in_front(): 正面にある壁をハイライトする。
+        _destroy_highlighted_wall(): ハイライト中の壁を破壊する。
+    """
     def __init__(self, global_state):
         # マップを生成
         self.map = Map.generate_maze_map(15, 15, [0, 0, 0], 100, coin_count=3)
@@ -461,6 +507,18 @@ class GameScene(Scene):
                     pyxel.line(int(x0), int(y0), int(x1), int(y1), pyxel.COLOR_ORANGE)
 
 class ScoreScene(Scene):
+    """スコア表示シーン（軽量版）
+
+    Members:
+        game_scene (GameScene): スコアを参照する元となるゲームシーン。
+        global_state (GlobalState): 全体の入力状態。
+        is_score_view (bool): スコア表示中かどうか。
+
+    Methods:
+        __init__(): スコアシーンを初期化する（スコアボード要素なし）。
+        update(): シーン遷移や再スタート操作を管理する。
+        draw(): 最終結果を表示する。
+    """
     def __init__(self, game_scene:GameScene, elapsed_time, global_state:GlobalState):
         # GameSceneを保持し、スコアとともに管理
         self.game_scene = game_scene

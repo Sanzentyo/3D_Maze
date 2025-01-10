@@ -1,3 +1,20 @@
+"""
+床や天井など平面描画に用いるクラスを定義します。
+
+Classes:
+    Plane(DrawObject):
+        平面オブジェクトを表すクラス。
+        Members:
+            plane_width (float): 平面の横幅。
+            plane_height (float): 平面の縦幅。
+            color (int): Pyxelのカラーパレット番号。
+        Methods:
+            __init__(): コンストラクタ。
+            _generate_vertices(): 頂点の生成。
+            _generate_faces(): 面の生成。
+            get_tri_sprites(): 三角形スプライトの生成。
+"""
+
 import numpy as np
 import pyxel
 

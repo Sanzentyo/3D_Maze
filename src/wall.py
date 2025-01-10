@@ -1,3 +1,21 @@
+"""
+3D空間内の壁を表現するクラスを定義するファイルです。
+
+Classes:
+    Wall:
+        3D迷路の壁を表現するクラス。
+        Members:
+            positions (list[list[float]]): 壁の位置座標のリスト。
+            size (float): 壁の一辺の長さ。
+            half_size (float): サイズの半分（計算用）。
+
+    HighlightedWall:
+        フォーカス時にハイライト表示される壁クラス。
+        Members:
+            position (list[float]): 壁の位置座標。
+            edge_width (int): エッジの太さ。
+"""
+
 from draw_object import DrawObject
 from tri_sprite import TriSprite
 import numpy as np
