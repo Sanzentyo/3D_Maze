@@ -140,7 +140,6 @@ class StartScene(Scene):
             for y in range(-self.tile_size, pyxel.height, self.tile_size):
                 pyxel.rect(x + offset_x, y + offset_y, self.tile_size, self.tile_size, pyxel.COLOR_NAVY if (x//self.tile_size + y//self.tile_size) % 2 == 0 else pyxel.COLOR_GRAY)
 
-        
         self.psychedelic_sphere.update()
         self.render_3d_scene(
             self.title_camera,
@@ -584,7 +583,7 @@ class ScoreBoard:
         board_width = self.screen_width * (4 / 5)
         board_height = self.screen_height * (2 / 5)
         board_x = (self.screen_width - board_width) // 2
-        board_y = (self.screen_height - board_height) // 2
+        board_y = (self.screen_height - board_height) // 2 - 40
 
         # 背景の描画
         pyxel.rect(board_x, board_y, board_width, board_height, pyxel.COLOR_BLACK)
@@ -598,6 +597,7 @@ class ScoreBoard:
         # 適度に明滅させる
         if pyxel.frame_count % 30 < 27:
             self.writer.draw(board_x + 20, board_y + 405, "Press R to restart", 60, pyxel.COLOR_BLACK)
+            self.writer.draw(board_x - 5, board_y + 475, "Press T to return to title", 45, pyxel.COLOR_BLACK)
 
 class ScoreScene(Scene):
     """
@@ -691,6 +691,7 @@ class ScoreScene(Scene):
                 self.is_transitioning = False
                 self.is_bird_view = not self.is_bird_view
 
+        # リスタート処理
         if pyxel.btnp(pyxel.KEY_R):
             # BGMを停止
             pyxel.stop(0)
@@ -698,6 +699,15 @@ class ScoreScene(Scene):
             pyxel.stop(2)
             
             return GameScene(self.global_state)
+        
+        # タイトル画面に戻る
+        if pyxel.btnp(pyxel.KEY_T):
+            # BGMを停止
+            pyxel.stop(0)
+            pyxel.stop(1)
+            pyxel.stop(2)
+            
+            return StartScene(self.global_state)
 
         return self
 

@@ -567,8 +567,13 @@ class ScoreScene(Scene):
                 self.is_transitioning = False
                 self.is_bird_view = not self.is_bird_view
 
+        # リスタート処理
         if pyxel.btnp(pyxel.KEY_R):
             return GameScene(self.global_state)
+        
+        # タイトル画面に戻る
+        if pyxel.btnp(pyxel.KEY_T):
+            return StartScene(self.global_state)
 
         return self
 
