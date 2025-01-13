@@ -178,3 +178,5 @@ cython_debug/
 *.pyxapp
 
 .vscode/
+
+.ruff_cache/

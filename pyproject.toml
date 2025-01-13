@@ -1,0 +1,13 @@
+[project]
+name = "3d_Maze"
+version = "0.1.0"
+description = "3D maze game for Pyxel"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=2.2.1",
+    "packaging>=24.2",
+    "pillow>=11.1.0",
+    "pyxel>=2.2.10",
+    "pyxel-universal-font>=1.1.1",
+]
