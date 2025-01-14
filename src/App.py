@@ -33,4 +33,5 @@ class App:
     def draw(self):
         self.scene.draw()
 
-App(720, 720)
+if __name__ == "__main__":
+    App(720, 720)
