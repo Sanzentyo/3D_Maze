@@ -1,26 +1,22 @@
 # 3D Maze
 A first-person 3D maze escape game created with pyxel. The BGM is generated using [8bit BGM generator](https://github.com/shiromofufactory/8bit-bgm-generator).
 
-- [日本語のドキュメント](./README.md)
-- [Detailed Design Document](./DETAILED_DESIGN_EN.md)
+### [日本語のドキュメント](./README.md)
 
 ## Demo Video
 <div><video controls src="https://raw.githubusercontent.com/Sanzentyo/3D_Maze/refs/heads/main/3D_Maze_Demo.mp4" title="3D_Maze_Demo.mp4" muted="false"></video></div>
 
 ## How to Run Native Version
-First, clone this repository:
 ```sh
+# Clone the repository
 git clone https://github.com/Sanzentyo/3D_Maze.git
-```
-
-Then, execute the following commands:
-```sh
 cd 3D_Maze
-pip install requirements.txt # Install required libraries (not needed if pyxel, numpy, pyxel-universal-font are already installed)
+
+# Using pip
+pip install -r requirements.txt # Install dependencies (not needed if pyxel, numpy, pyxel-universal-font are already installed)
 python src/App.py # Launch the game
-```
-If you use [uv](https://github.com/astral-sh/uv), execute the following command:
-```sh
+
+# Using uv
 uv run src/App.py
 ```
 
@@ -29,19 +25,22 @@ Due to pyxel specifications and performance considerations, text, scoreboard, an
 https://sanzentyo.github.io/3D_Maze
 
 ## Controls
-For detailed control information, please refer to the [Detailed Design Document](./DETAILED_DESIGN_EN.md#5-controls).
 
 ### Basic Controls
-- Movement: WASD keys or Arrow keys
-- Toggle Bird View: B key
-- Exit Game: ESC key or Q key
-- View Control: Mouse movement
-- Disable View Control and Show Mouse: Ctrl key
-- Focus: F key (requires at least one coin)
-- Destroy Wall: Left-click while focusing
+| Action | Key/Mouse |
+|--------|-----------|
+| Movement | WASD keys or Arrow keys |
+| View Control | Mouse movement |
+| Toggle Bird View | B key |
+| Exit Game | ESC key or Q key |
+| Disable View Control and Show Mouse | Ctrl key |
+| Focus | F key (requires at least one coin) |
+| Destroy Wall | Left-click while focusing |
 
 ### Debug Controls
-- Toggle Master View Mode: Ctrl + M keys. In Master View Mode, goal detection and wall collision are disabled
-- Vertical Movement: In Master View Mode, Space to ascend, Shift to descend
-- Toggle Movement Mode: M key in Master View Mode switches between View Base movement and Yaw Base movement. Normal mode uses Yaw Base movement
-- Toggle Wireframe Display: Ctrl + W keys
+| Action | Key/Mouse |
+|--------|-----------|
+| Toggle Master View Mode | Ctrl + M keys |
+| Vertical Movement | Space (ascend), Shift (descend) *Master View Mode only |
+| Toggle Movement Mode | M key *Master View Mode only |
+| Toggle Wireframe Display | Ctrl + W keys |
