@@ -18,6 +18,10 @@ cd 3D_Maze
 pip install requirements.txt # 必要なライブラリのインストール(pyxel, numpy, pyxel-universal-fontがインストールされているなら不要)
 python src/App.py # ゲームの起動
 ```
+[uv](https://github.com/astral-sh/uv)を使う場合は、以下のコマンドを実行してください。
+```sh
+uv run src/App.py
+```
 
 ## Web版
 pyxelの仕様とパフォーマンスの都合上、文字とスコアボード、bgmが削除されています。それ以外はネイティブと同じ動作をします。

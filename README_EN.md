@@ -19,6 +19,10 @@ cd 3D_Maze
 pip install requirements.txt # Install required libraries (not needed if pyxel, numpy, pyxel-universal-font are already installed)
 python src/App.py # Launch the game
 ```
+If you use [uv](https://github.com/astral-sh/uv), execute the following command:
+```sh
+uv run src/App.py
+```
 
 ## Web Version
 Due to pyxel specifications and performance considerations, text, scoreboard, and BGM have been removed. Otherwise, it functions the same as the native version.  
