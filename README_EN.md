@@ -4,7 +4,7 @@ A first-person 3D maze escape game created with pyxel. The BGM is generated usin
 ### [日本語のドキュメント](./README.md)
 
 ## Demo Video
-<div><video controls src="https://raw.githubusercontent.com/Sanzentyo/3D_Maze/refs/heads/main/3D_Maze_Demo.mp4" title="3D_Maze_Demo.mp4" muted="false"></video></div>
+https://github.com/user-attachments/assets/8420ff48-99f3-41fa-b530-b3f89bc99ab1
 
 ## How to Run Native Version
 ```sh
