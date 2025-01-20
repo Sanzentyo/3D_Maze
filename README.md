@@ -4,7 +4,7 @@ pyxelで作成された一人称視点の3D迷路脱出ゲームです。BGMに�
 ### [English Documentation](./README_EN.md)
 
 ## デモ動画
-https://github.com/user-attachments/assets/408bd84b-8ef7-49dd-9a12-a4e0f4806256
+https://github.com/user-attachments/assets/5ab598fe-1ead-4474-a6f0-38ee2f06d171
 
 ## ネイティブ版の実行方法
 ```sh
