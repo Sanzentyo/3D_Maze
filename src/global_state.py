@@ -20,7 +20,7 @@ class GlobalState:
     def __init__(self):
         self.is_view_wireframe = False # CTRL + Wで切り替え
         self.is_master_view = False # CTRL + Mで切り替え
-        self.is_view_based_movement = True # マスタービュー時のみ M で切り替え
+        self.is_view_based_movement = False # マスタービュー時のみ M で切り替え
         self.keyboard_state = {}
         
     def update(self):
