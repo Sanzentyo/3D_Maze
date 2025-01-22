@@ -21,7 +21,6 @@ class App:
         self.width = width
         self.height = height
         self.global_state = GlobalState()
-        self.is_view_wireframe = False
         pyxel.init(width, height)
         init_sound()
         self.scene:Scene = StartScene(self.global_state)
