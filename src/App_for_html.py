@@ -21,7 +21,7 @@ class App:
         self.width = width
         self.height = height
         self.global_state = GlobalState()
-        pyxel.init(width, height)
+        pyxel.init(width, height, title="3D Maze")
         init_sound()
         self.scene:Scene = StartScene(self.global_state)
         pyxel.run(self.update, self.draw)
