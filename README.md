@@ -4,7 +4,7 @@ pyxelで作成された一人称視点の3D迷路脱出ゲームです。BGMに�
 ### [English Documentation](./README_EN.md)
 
 ## デモ動画
-<div><video controls src="https://raw.githubusercontent.com/Sanzentyo/3D_Maze/refs/heads/main/3D_Maze_Demo.mp4" title="3D_Maze_Demo.mp4" muted="false"></video></div>
+https://github.com/user-attachments/assets/5ab598fe-1ead-4474-a6f0-38ee2f06d171
 
 ## ネイティブ版の実行方法
 ```sh
