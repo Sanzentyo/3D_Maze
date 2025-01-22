@@ -622,18 +622,6 @@ class ScoreScene(Scene):
         self.is_score_view = True
         self.scoreboard = ScoreBoard(elapsed_time, pyxel.width, pyxel.height)
 
-        # 鳥瞰視点用の変数を追加
-        self.is_transitioning = False
-        self.transition_start_time = 0
-        self.transition_duration = 30
-        self.is_bird_view = True  # ScoreScene に来た時点で鳥瞰視点を想定
-        self.original_position = None
-        self.original_yaw = None
-        self.original_pitch = None
-        self.target_position = None
-        self.target_yaw = None
-        self.target_pitch = None
-
         # BGMの再生を追加
         from bgm_data import score_scene_bgm_data
         self.bgm_data = score_scene_bgm_data
@@ -649,47 +637,6 @@ class ScoreScene(Scene):
         # スコアシーンでのスコアボード表示切り替え
         if pyxel.btnp(pyxel.KEY_TAB):
             self.is_score_view = not self.is_score_view
-
-        # 鳥瞰視点切り替え
-        if not self.is_transitioning and pyxel.btnp(pyxel.KEY_B):
-            self.is_transitioning = True
-            self.transition_start_time = pyxel.frame_count
-            camera = self.game_scene.camera
-
-            if not self.is_bird_view:
-                # 通常視点から鳥瞰視点
-                self.original_position = camera.position.copy()
-                self.original_yaw = camera.yaw
-                self.original_pitch = camera.pitch
-                bird_pos, (bird_yaw, bird_pitch) = self.game_scene.map.get_bird_view()
-                self.target_position = np.array(bird_pos)
-                self.target_yaw = bird_yaw
-                self.target_pitch = bird_pitch
-            else:
-                # 鳥瞰視点から通常視点
-                self.target_position = self.original_position
-                self.target_yaw = self.original_yaw
-                self.target_pitch = self.original_pitch
-                bird_pos, (bird_yaw, bird_pitch) = self.game_scene.map.get_bird_view()
-                self.original_position = np.array(bird_pos)
-                self.original_yaw = bird_yaw
-                self.original_pitch = bird_pitch
-
-        if self.is_transitioning:
-            camera = self.game_scene.camera
-            progress = min(1.0, (pyxel.frame_count - self.transition_start_time) / self.transition_duration)
-            camera.position = self.original_position + (self.target_position - self.original_position) * progress
-            camera.yaw = self.original_yaw + (self.target_yaw - self.original_yaw) * progress
-            camera.pitch = self.original_pitch + (self.target_pitch - self.original_pitch) * progress
-
-            if not self.is_bird_view:
-                camera.fov = self.game_scene.normal_fov + (self.game_scene.bird_fov - self.game_scene.normal_fov) * progress
-            else:
-                camera.fov = self.game_scene.bird_fov + (self.game_scene.normal_fov - self.game_scene.bird_fov) * progress
-
-            if progress >= 1.0:
-                self.is_transitioning = False
-                self.is_bird_view = not self.is_bird_view
 
         # リスタート処理
         if pyxel.btnp(pyxel.KEY_R):
